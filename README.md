@@ -3,6 +3,9 @@
 An elegant, mobile-first **movie database app** — discover, search and track films
 in a cinematic dark interface. Built with React, TypeScript and Vite.
 
+**▶ Live app: https://geryngman.github.io/Movie-db/** — open it on your phone and
+install it to your home screen (see [Install it as an app](#-install-it-as-an-app)).
+
 <p align="center">
   <em>Home · Search · Movie detail · Watchlist · Profile</em>
 </p>
@@ -27,22 +30,34 @@ in a cinematic dark interface. Built with React, TypeScript and Vite.
 ## 📲 Install it as an app
 
 CineHub is a **Progressive Web App**, so it installs straight from the browser —
-no app store required.
+no app store required. It's already hosted for you on GitHub Pages.
 
-1. Run a production build and serve it over `http://localhost` or HTTPS
-   (a service worker requires a secure context):
-   ```bash
-   npm run build && npm run preview
-   ```
-2. Open the app in your browser and install it:
-   - **Android / Chrome / Edge** — tap the **Install** banner that appears, or use
-     the browser menu → *Install app* / *Add to Home screen*.
-   - **iOS / Safari** — tap the **Share** button, then **Add to Home Screen**
-     (the app shows a hint for this).
-   - **Desktop Chrome / Edge** — click the install icon in the address bar.
+### On an Android phone (Chrome)
 
-Once installed it launches full-screen in portrait, with its own icon and an
-offline-ready cache.
+1. Open **https://geryngman.github.io/Movie-db/** in Chrome.
+2. Tap the **Install** banner at the bottom (or the **⋮** menu → **Install app** /
+   **Add to Home screen**).
+3. Confirm **Install**. CineHub now has its own icon in your app drawer and
+   launches full-screen like a native app.
+
+### On an iPhone/iPad (Safari)
+
+1. Open the link in **Safari**.
+2. Tap the **Share** button → **Add to Home Screen** → **Add**.
+
+### On a computer (Chrome/Edge)
+
+Open the link and click the **install icon** in the address bar.
+
+### Hosting it yourself
+
+Every push to the app branch triggers `.github/workflows/deploy.yml`, which builds
+the app and publishes `dist/` to GitHub Pages automatically. To run it locally
+instead:
+
+```bash
+npm run build && npm run preview
+```
 
 ## 🧱 Tech stack
 
