@@ -28,12 +28,15 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: npm
 
       - name: Configure GitHub Pages
-        # Enables Pages (source = GitHub Actions) automatically where permitted.
+        # Turns on Pages (source = GitHub Actions) automatically, so no manual
+        # repository setting is required for the first deploy.
         uses: actions/configure-pages@v5
+        with:
+          enablement: true
 
       - name: Install dependencies
         run: npm ci
