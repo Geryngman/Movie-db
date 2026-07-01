@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from 'react-router-dom'
-import { getMovie, MOVIES } from '../data/movies'
+import { useMovies } from '../context/MoviesContext'
 import { useLibrary } from '../context/LibraryContext'
 import { backdropUrl } from '../lib/images'
 import Poster from '../components/Poster'
@@ -11,6 +11,8 @@ import {
   BookmarkIcon,
   CheckIcon,
   HeartIcon,
+  EditIcon,
+  TrashIcon,
 } from '../components/icons'
 
 function runtimeLabel(min: number): string {
@@ -22,8 +24,18 @@ function runtimeLabel(min: number): string {
 export default function MovieDetail() {
   const { id } = useParams()
   const navigate = useNavigate()
+  const { getMovie, movies, deleteMovie } = useMovies()
   const movie = getMovie(Number(id))
   const { inWatchlist, toggleWatchlist, isFavorite, toggleFavorite } = useLibrary()
+
+  const handleDelete = () => {
+    if (!movie) return
+    const ok = window.confirm(`Delete “${movie.title}”? This can't be undone.`)
+    if (ok) {
+      deleteMovie(movie.id)
+      navigate('/', { replace: true })
+    }
+  }
 
   if (!movie) {
     return (
@@ -42,9 +54,9 @@ export default function MovieDetail() {
   const faved = isFavorite(movie.id)
   const bg = backdropUrl(movie.backdropPath)
 
-  const similar = MOVIES.filter(
-    (m) => m.id !== movie.id && m.genres.some((g) => movie.genres.includes(g)),
-  ).slice(0, 12)
+  const similar = movies
+    .filter((m) => m.id !== movie.id && m.genres.some((g) => movie.genres.includes(g)))
+    .slice(0, 12)
 
   return (
     <div className="screen detail">
@@ -59,13 +71,22 @@ export default function MovieDetail() {
         <button className="iconbtn detail__back" onClick={() => navigate(-1)} aria-label="Back">
           <ChevronLeftIcon width={24} height={24} />
         </button>
-        <button
-          className={`iconbtn detail__fav ${faved ? 'is-active' : ''}`}
-          onClick={() => toggleFavorite(movie.id)}
-          aria-label="Favorite"
-        >
-          <HeartIcon width={22} height={22} />
-        </button>
+        <div className="detail__actions">
+          <button
+            className="iconbtn"
+            onClick={() => navigate(`/movie/${movie.id}/edit`)}
+            aria-label="Edit"
+          >
+            <EditIcon width={20} height={20} />
+          </button>
+          <button
+            className={`iconbtn ${faved ? 'is-active detail__fav' : ''}`}
+            onClick={() => toggleFavorite(movie.id)}
+            aria-label="Favorite"
+          >
+            <HeartIcon width={22} height={22} />
+          </button>
+        </div>
       </div>
 
       <div className="detail__head">
@@ -137,6 +158,17 @@ export default function MovieDetail() {
           <Rail title="More like this" movies={similar} />
         </div>
       )}
+
+      <div className="detail__manage">
+        <button className="btn btn--ghost" onClick={() => navigate(`/movie/${movie.id}/edit`)}>
+          <EditIcon width={17} height={17} />
+          Edit
+        </button>
+        <button className="btn btn--danger" onClick={handleDelete}>
+          <TrashIcon width={17} height={17} />
+          Delete
+        </button>
+      </div>
     </div>
   )
 }

@@ -1,15 +1,16 @@
 import { useNavigate } from 'react-router-dom'
 import { useLibrary } from '../context/LibraryContext'
-import { MOVIES } from '../data/movies'
+import { useMovies } from '../context/MoviesContext'
 import MovieCard from '../components/MovieCard'
 import { HeartIcon } from '../components/icons'
 
 export default function Profile() {
   const navigate = useNavigate()
   const { watchlist, favorites } = useLibrary()
+  const { getMovie } = useMovies()
 
   const favMovies = favorites
-    .map((id) => MOVIES.find((m) => m.id === id))
+    .map((id) => getMovie(id))
     .filter((m): m is NonNullable<typeof m> => Boolean(m))
 
   const watched = favorites.length + watchlist.length

@@ -1,15 +1,17 @@
 import { useNavigate } from 'react-router-dom'
-import { MOVIES } from '../data/movies'
+import { useMovies } from '../context/MoviesContext'
 import FeaturedHero from '../components/FeaturedHero'
 import Rail from '../components/Rail'
+import { PlusIcon } from '../components/icons'
 
 export default function Home() {
   const navigate = useNavigate()
-  const featured = MOVIES.filter((m) => m.featured)
-  const trending = MOVIES.filter((m) => m.trending)
-  const topRated = [...MOVIES].sort((a, b) => b.rating - a.rating).slice(0, 12)
-  const animation = MOVIES.filter((m) => m.genres.includes('Animation'))
-  const sciFi = MOVIES.filter((m) => m.genres.includes('Sci-Fi'))
+  const { movies } = useMovies()
+  const featured = movies.filter((m) => m.featured)
+  const trending = movies.filter((m) => m.trending)
+  const topRated = [...movies].sort((a, b) => b.rating - a.rating).slice(0, 12)
+  const animation = movies.filter((m) => m.genres.includes('Animation'))
+  const sciFi = movies.filter((m) => m.genres.includes('Sci-Fi'))
 
   return (
     <div className="screen home">
@@ -34,6 +36,14 @@ export default function Home() {
       <Rail title="Top rated" movies={topRated} />
       <Rail title="Animation" movies={animation} />
       <Rail title="Science fiction" movies={sciFi} />
+
+      <button
+        className="fab"
+        onClick={() => navigate('/movie/new')}
+        aria-label="Add a movie"
+      >
+        <PlusIcon width={24} height={24} />
+      </button>
     </div>
   )
 }

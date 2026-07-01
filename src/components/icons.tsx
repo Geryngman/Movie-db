@@ -90,3 +90,16 @@ export const FilmIcon = (p: IconProps) => (
     <path d="M7 4v16M17 4v16M3 9h4M17 9h4M3 15h4M17 15h4" />
   </svg>
 )
+
+export const EditIcon = (p: IconProps) => (
+  <svg {...base(p)}>
+    <path d="M12 20h9" />
+    <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5Z" />
+  </svg>
+)
+
+export const TrashIcon = (p: IconProps) => (
+  <svg {...base(p)}>
+    <path d="M3 6h18M8 6V4a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2M6 6l1 14a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1l1-14M10 11v6M14 11v6" />
+  </svg>
+)

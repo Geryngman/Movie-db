@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import App from './App.tsx'
 import { LibraryProvider } from './context/LibraryContext.tsx'
+import { MoviesProvider } from './context/MoviesContext.tsx'
 import './index.css'
 
 // Strip the trailing slash so React Router gets a clean basename
@@ -12,9 +13,11 @@ const basename = import.meta.env.BASE_URL.replace(/\/$/, '')
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <BrowserRouter basename={basename}>
-      <LibraryProvider>
-        <App />
-      </LibraryProvider>
+      <MoviesProvider>
+        <LibraryProvider>
+          <App />
+        </LibraryProvider>
+      </MoviesProvider>
     </BrowserRouter>
   </React.StrictMode>,
 )

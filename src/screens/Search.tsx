@@ -1,15 +1,17 @@
 import { useMemo, useState } from 'react'
-import { MOVIES, ALL_GENRES } from '../data/movies'
+import { useMovies } from '../context/MoviesContext'
+import { GENRES } from '../data/movies'
 import MovieCard from '../components/MovieCard'
 import { SearchIcon, FilmIcon } from '../components/icons'
 
 export default function Search() {
+  const { movies } = useMovies()
   const [query, setQuery] = useState('')
   const [genre, setGenre] = useState<string | null>(null)
 
   const results = useMemo(() => {
     const q = query.trim().toLowerCase()
-    return MOVIES.filter((m) => {
+    return movies.filter((m) => {
       const matchesGenre = !genre || m.genres.includes(genre)
       const matchesQuery =
         !q ||
@@ -19,7 +21,7 @@ export default function Search() {
         m.genres.some((g) => g.toLowerCase().includes(q))
       return matchesGenre && matchesQuery
     }).sort((a, b) => b.rating - a.rating)
-  }, [query, genre])
+  }, [movies, query, genre])
 
   return (
     <div className="screen search">
@@ -52,7 +54,7 @@ export default function Search() {
         >
           All
         </button>
-        {ALL_GENRES.map((g) => (
+        {GENRES.map((g) => (
           <button
             key={g}
             className={`chip ${genre === g ? 'is-active' : ''}`}

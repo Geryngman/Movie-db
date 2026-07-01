@@ -1,16 +1,17 @@
 import { useNavigate } from 'react-router-dom'
 import { useLibrary } from '../context/LibraryContext'
-import { MOVIES } from '../data/movies'
+import { useMovies } from '../context/MoviesContext'
 import MovieCard from '../components/MovieCard'
 import { BookmarkIcon } from '../components/icons'
 
 export default function Watchlist() {
   const navigate = useNavigate()
   const { watchlist } = useLibrary()
+  const { getMovie } = useMovies()
 
   // Preserve the order movies were added (watchlist stores newest-first).
   const movies = watchlist
-    .map((id) => MOVIES.find((m) => m.id === id))
+    .map((id) => getMovie(id))
     .filter((m): m is NonNullable<typeof m> => Boolean(m))
 
   return (

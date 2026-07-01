@@ -405,6 +405,23 @@ export const MOVIES: Movie[] = [
   },
 ]
 
+// Canonical genre list used by the search filter and the add/edit form. Kept
+// fixed (rather than derived) so user-created movies can pick from a stable set.
+export const GENRES: string[] = [
+  'Action',
+  'Adventure',
+  'Animation',
+  'Comedy',
+  'Crime',
+  'Drama',
+  'Fantasy',
+  'Horror',
+  'Mystery',
+  'Romance',
+  'Sci-Fi',
+  'Thriller',
+]
+
 export const ALL_GENRES: string[] = Array.from(
   new Set(MOVIES.flatMap((m) => m.genres)),
 ).sort()

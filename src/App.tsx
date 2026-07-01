@@ -7,6 +7,7 @@ import Search from './screens/Search'
 import Watchlist from './screens/Watchlist'
 import Profile from './screens/Profile'
 import MovieDetail from './screens/MovieDetail'
+import MovieForm from './screens/MovieForm'
 
 export default function App() {
   const location = useLocation()
@@ -29,6 +30,8 @@ export default function App() {
             <Route path="/search" element={<Search />} />
             <Route path="/watchlist" element={<Watchlist />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/movie/new" element={<MovieForm />} />
+            <Route path="/movie/:id/edit" element={<MovieForm />} />
             <Route path="/movie/:id" element={<MovieDetail />} />
           </Routes>
         </div>

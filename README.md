@@ -17,6 +17,9 @@ install it to your home screen (see [Install it as an app](#-install-it-as-an-ap
 - **Search** — instant filtering by title, director, cast or genre, with genre chips.
 - **Movie detail** — backdrop, poster, rating, runtime, overview, director & cast,
   and a "More like this" rail.
+- **Full CRUD** — add your own movies (floating **+** button on Home), edit any
+  movie, and delete them (with confirmation). All additions, edits and deletions
+  are saved locally and layered over the built-in catalogue.
 - **Watchlist & Favorites** — save films with a tap; persisted locally so they
   survive reloads.
 - **Profile** — your stats and favorites at a glance.
@@ -84,8 +87,8 @@ device toolbar (mobile view) — or just resize the window narrow.
 ```
 src/
 ├── components/       reusable UI (Poster, MovieCard, Rail, hero, nav, icons, install prompt)
-├── screens/          Home, Search, Watchlist, Profile, MovieDetail
-├── context/          LibraryContext — watchlist/favorites + localStorage
+├── screens/          Home, Search, Watchlist, Profile, MovieDetail, MovieForm
+├── context/          MoviesContext — CRUD store; LibraryContext — watchlist/favorites
 ├── data/movies.ts    curated film catalogue
 ├── lib/images.ts     TMDB image URL helpers
 ├── types.ts          shared types
