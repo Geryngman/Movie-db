@@ -1,6 +1,7 @@
 import { Routes, Route, useLocation } from 'react-router-dom'
 import { useEffect, useRef } from 'react'
 import BottomNav from './components/BottomNav'
+import InstallPrompt from './components/InstallPrompt'
 import Home from './screens/Home'
 import Search from './screens/Search'
 import Watchlist from './screens/Watchlist'
@@ -32,6 +33,7 @@ export default function App() {
           </Routes>
         </div>
         {!isDetail && <BottomNav />}
+        <InstallPrompt />
       </div>
     </div>
   )

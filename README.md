@@ -19,14 +19,37 @@ in a cinematic dark interface. Built with React, TypeScript and Vite.
 - **Profile** — your stats and favorites at a glance.
 - **Designed like a native app** — bottom tab bar, phone frame on desktop,
   full-bleed on mobile, smooth transitions, safe-area aware.
-- **Works offline** — every poster/backdrop has an elegant gradient fallback, so
-  the UI stays polished with or without a network.
+- **Installable (PWA)** — add it to your home screen and launch it full-screen
+  like a native app, with an offline-capable service worker.
+- **Works offline** — the app shell is precached, and every poster/backdrop has
+  an elegant gradient fallback, so the UI stays polished with or without a network.
+
+## 📲 Install it as an app
+
+CineHub is a **Progressive Web App**, so it installs straight from the browser —
+no app store required.
+
+1. Run a production build and serve it over `http://localhost` or HTTPS
+   (a service worker requires a secure context):
+   ```bash
+   npm run build && npm run preview
+   ```
+2. Open the app in your browser and install it:
+   - **Android / Chrome / Edge** — tap the **Install** banner that appears, or use
+     the browser menu → *Install app* / *Add to Home screen*.
+   - **iOS / Safari** — tap the **Share** button, then **Add to Home Screen**
+     (the app shows a hint for this).
+   - **Desktop Chrome / Edge** — click the install icon in the address bar.
+
+Once installed it launches full-screen in portrait, with its own icon and an
+offline-ready cache.
 
 ## 🧱 Tech stack
 
 - [React 18](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/)
 - [Vite](https://vitejs.dev/) for dev/build
 - [React Router](https://reactrouter.com/) for navigation
+- [vite-plugin-pwa](https://vite-pwa-org.netlify.app/) (Workbox) for the installable PWA
 - No UI framework — a hand-crafted CSS design system (`src/index.css`)
 
 ## 🚀 Getting started
@@ -45,7 +68,7 @@ device toolbar (mobile view) — or just resize the window narrow.
 
 ```
 src/
-├── components/       reusable UI (Poster, MovieCard, Rail, hero, nav, icons)
+├── components/       reusable UI (Poster, MovieCard, Rail, hero, nav, icons, install prompt)
 ├── screens/          Home, Search, Watchlist, Profile, MovieDetail
 ├── context/          LibraryContext — watchlist/favorites + localStorage
 ├── data/movies.ts    curated film catalogue
