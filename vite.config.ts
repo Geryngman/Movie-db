@@ -2,8 +2,13 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
 
+// The app is hosted on GitHub Pages at https://geryngman.github.io/Movie-db/,
+// so it is served from the "/Movie-db/" sub-path. Everything below is base-aware.
+const BASE = '/Movie-db/'
+
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: BASE,
   plugins: [
     react(),
     VitePWA({
@@ -17,8 +22,8 @@ export default defineConfig({
         background_color: '#0b0b12',
         display: 'standalone',
         orientation: 'portrait',
-        scope: '/',
-        start_url: '/',
+        scope: BASE,
+        start_url: BASE,
         categories: ['entertainment', 'lifestyle'],
         icons: [
           { src: 'icon-192.png', sizes: '192x192', type: 'image/png', purpose: 'any' },

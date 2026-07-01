@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CineHub</title>
+    <!--
+      GitHub Pages has no server-side routing. If someone opens a deep link
+      directly (before the service worker is installed), redirect them to the
+      app's start URL so the single-page app can take over.
+    -->
+    <script>
+      var base = '/Movie-db/'
+      if (location.pathname.indexOf(base) !== 0 || location.pathname !== base) {
+        location.replace(base)
+      }
+    </script>
+  </head>
+  <body>
+    Redirecting to <a href="/Movie-db/">CineHub</a>…
+  </body>
+</html>
